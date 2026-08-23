@@ -1,33 +1,33 @@
 import { useState, useEffect } from "react";
 
 function App() {
-  const [ users, setUsers] = useState([]);
-  const[loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(false);
 
-useEffect( () => {
-
-  fetch("https://jsonplaceholder.typicode.com/users")
-  .then(response => 
-    response.json() )
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+    .then(response => response.json())
     .then(data => {
-      setUsers(data);
-      setLoading(false);
-      
-    });
+      setProducts(data.products);
+    })
+
+    .catch(() => {
+      setError(true);
+  });
   }, []);
-  
-  return(
+
+
+  return (
     <div>
-      <h1>API Practice</h1>
+      {error && <p>Something went wrong!</p>}
 
-      {loading && <p>Loading users..</p>}
-
-      {users.map(user => (
-        <p key={user.id}>{user.name}</p>
-      ))}
+      <ul>
+        {products.map(product => (
+          <li key={product.id}>{product.title}</li>
+        ))}
+      </ul>
     </div>
   );
 }
-
 
 export default App;
