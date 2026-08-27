@@ -1,88 +1,39 @@
-import {
-   Routes, 
-   Route,
-   NavLink, 
-   useNavigate 
-} from "react-router-dom";
-import "./App.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+function Login() {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    navigate("/home");
+  }
+  return(
+    <form onSubmit={handleSubmit}>
+      <input
+      type="text"
+      value={username}
+      onChange = { (e) => {
+        setUsername(e.target.value);
+      }}
+      />
+      <button type="submit">
+        Submit
+      </button>
+    </form>
+  );
+}
 function Home() {
   return <h1>Home Page</h1>;
 }
 
-function Contact() {
-  const navigate = useNavigate();
-  return(
-  <div>
-    <h1>Contact</h1>
-    <button onClick={ () => {
-      navigate("/home")
-    }}
-    >
-      Go to Home
-    </button>
-  </div>
-  );
-}
-
-function Products() {
-  const navigate = useNavigate();
-  return (
-  <div>
-    <h1>Products</h1>
-    <button onClick={ () => {
-      navigate("/home")
-    }}
-    >
-      Go to Home
-    </button>
-    </div>
-  );
-}
-
 function App() {
-  return(
-    <div>
-      <nav>
-    <NavLink to="/home"
-    className = {
-      ( { isActive }) => {
-        return isActive ? "active" : ""
-      }
-    }
-    >
-      Home
-      </NavLink>
-
-    <NavLink 
-    to="/contact"
-      className = { 
-        ( { isActive }) => {
-          return isActive ? "active" : ""
-        }
-      }
-      >
-       Contact
-    </NavLink>
-
-
-    <NavLink to="/products"
-    className = {
-      ( { isActive }) => {
-        return isActive ? "active" : ""
-      }
-    }
-    >
-      Products
-      </NavLink>
-    </nav>
+  return (
     <Routes>
-  <Route path="/home" element={<Home />} />
-  <Route path="/contact" element={<Contact />} />
-  <Route path="/products" element={<Products />} />
-</Routes>
-</div>
-  )
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<Home />} />
+    </Routes>
+  );
 }
-
 export default App;
