@@ -1,33 +1,88 @@
-import { useState, useEffect } from "react";
+import {
+   Routes, 
+   Route,
+   NavLink, 
+   useNavigate 
+} from "react-router-dom";
+import "./App.css";
 
-function App() {
-  const [products, setProducts] = useState([]);
-  const [error, setError] = useState(false);
+function Home() {
+  return <h1>Home Page</h1>;
+}
 
-  useEffect(() => {
-    fetch("https://dummyjson.com/products")
-    .then(response => response.json())
-    .then(data => {
-      setProducts(data.products);
-    })
+function Contact() {
+  const navigate = useNavigate();
+  return(
+  <div>
+    <h1>Contact</h1>
+    <button onClick={ () => {
+      navigate("/home")
+    }}
+    >
+      Go to Home
+    </button>
+  </div>
+  );
+}
 
-    .catch(() => {
-      setError(true);
-  });
-  }, []);
-
-
+function Products() {
+  const navigate = useNavigate();
   return (
-    <div>
-      {error && <p>Something went wrong!</p>}
-
-      <ul>
-        {products.map(product => (
-          <li key={product.id}>{product.title}</li>
-        ))}
-      </ul>
+  <div>
+    <h1>Products</h1>
+    <button onClick={ () => {
+      navigate("/home")
+    }}
+    >
+      Go to Home
+    </button>
     </div>
   );
+}
+
+function App() {
+  return(
+    <div>
+      <nav>
+    <NavLink to="/home"
+    className = {
+      ( { isActive }) => {
+        return isActive ? "active" : ""
+      }
+    }
+    >
+      Home
+      </NavLink>
+
+    <NavLink 
+    to="/contact"
+      className = { 
+        ( { isActive }) => {
+          return isActive ? "active" : ""
+        }
+      }
+      >
+       Contact
+    </NavLink>
+
+
+    <NavLink to="/products"
+    className = {
+      ( { isActive }) => {
+        return isActive ? "active" : ""
+      }
+    }
+    >
+      Products
+      </NavLink>
+    </nav>
+    <Routes>
+  <Route path="/home" element={<Home />} />
+  <Route path="/contact" element={<Contact />} />
+  <Route path="/products" element={<Products />} />
+</Routes>
+</div>
+  )
 }
 
 export default App;
