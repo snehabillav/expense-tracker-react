@@ -1,39 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-function Login() {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+import { Outlet } from "react-router-dom";
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    navigate("/home");
-  }
-  return(
-    <form onSubmit={handleSubmit}>
-      <input
-      type="text"
-      value={username}
-      onChange = { (e) => {
-        setUsername(e.target.value);
-      }}
-      />
-      <button type="submit">
-        Submit
-      </button>
-    </form>
+
+function Products() {
+  return (
+  <div>
+    <h1>Products</h1>
+    <Outlet />
+
+    </div>
   );
 }
-function Home() {
-  return <h1>Home Page</h1>;
+
+function Phones() {
+  return <h2>Phones</h2>;
 }
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/home" element={<Home />} />
-    </Routes>
+<Routes>
+  <Route path="/products" element={<Products />}>
+  <Route path="phones" element={<Phones />}>
+  </Route>
+  </Route>
+</Routes>
   );
 }
+
 export default App;
