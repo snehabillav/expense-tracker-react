@@ -1,31 +1,48 @@
 import { Routes, Route } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-function Dashboard() {
-    return(
+
+function Home() {
+    return (
         <div>
-            <h1>Dashboard</h1>
-            <Outlet />
+            <h1>Home</h1>
+            <Link to="/products">Go to Products</Link>
         </div>
     );
 }
 
-function Profile() {
-    return <h2>Profile</h2>
+
+function Products () {
+    return (
+        <div>
+            <h1>Products</h1>
+            <Link to="/products/101">View Product 101</Link>
+        </div>
+    );
 }
 
-function Settings() {
-    return <h2>Settings</h2>
+
+function ProductDetails() {
+    const id = useParams();
+    return (
+    <div>
+        <h1>Product Details</h1>
+        <h1>Product ID: {id.id}</h1>
+        
+    </div>
+    );
 }
 
 function App() {
-    return (
+    return(
+     <div>
         <Routes>
-            <Route path="/dashboard" element={<Dashboard />}>
-                <Route path="profile" element={<Profile />} />
-                <Route path="settings" element={<Settings />} />
-            </Route>
-        </Routes>
+            <Route path="/"  element={<Home />} />
+            <Route path="/products" element={<Products />} />
+             <Route path="/products/:id" element={<ProductDetails />} />
+       </Routes>
+        </div>
     );
 }
 
