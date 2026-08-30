@@ -1,49 +1,84 @@
 import { Routes, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function Home() {
     return (
-        <div>
-            <h1>Home</h1>
-            <Link to="/products">Go to Products</Link>
-        </div>
-    );
-}
-
-
-function Products () {
-    return (
-        <div>
-            <h1>Products</h1>
-            <Link to="/products/101">View Product 101</Link>
-        </div>
-    );
-}
-
-
-function ProductDetails() {
-    const id = useParams();
-    return (
     <div>
-        <h1>Product Details</h1>
-        <h1>Product ID: {id.id}</h1>
-        
+        <h1>Home</h1>
+        <Link to= "/about"> Go to About </Link>
+        <Link to= "/contact"> Go to Contact </Link>
+        <Link to= "/login"> Go to Login </Link>
     </div>
     );
 }
 
-function App() {
+function About() {
+    return (
+    <div>
+        <h1>About</h1>
+        <Link to= "/"> Back to Home </Link>
+    </div>
+  );
+}
+
+function Contact() {
     return(
-     <div>
-        <Routes>
-            <Route path="/"  element={<Home />} />
-            <Route path="/products" element={<Products />} />
-             <Route path="/products/:id" element={<ProductDetails />} />
-       </Routes>
-        </div>
+    <div>
+        <h1>Contact</h1>
+        <NavLink 
+        to= "/"
+        className={({ isActive }) => isActive ? "active" : ""}
+        > 
+        Home 
+        </NavLink>
+
+        <NavLink 
+        to= "/about"
+        className={({ isActive }) => isActive ? "active" : ""}
+        >
+             About
+              </NavLink>
+
+
+        <NavLink
+         to= "/login"
+         className={({ isActive }) => isActive ? "active" : ""}
+         > 
+         Login 
+         </NavLink>
+    </div>
     );
+}
+
+function Login() {
+    const navigate = useNavigate(); 
+    
+    function handleLogin() {
+        navigate("/")
+    }
+        return(
+            <div>
+                <h1>Login</h1>
+                <button onClick={handleLogin}>
+                    Login
+                </button>
+            </div>
+        );
+    }
+
+    
+
+function App() {
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
+        </Routes>
+    )
 }
 
 export default App;
