@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body, 
+#root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f5f7fb;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+}
+
+
+#root{
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+.expense-container {
+    width: 500px;
+    max-width: 90%;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+.title {
+    text-align: center;
+    margin: 0 0 28px;
+    font-size: 32px;
+    color: #222;
+}
+
+.expense-form {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr auto;
+    gap: 15px;
+    align-items: center;
+}
+
+.expense-form input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    background-color: #6b7280;
+    color: white;
+    border: 1px solid #6b7280;
+    border-radius: 7px;
+    outline: none;
+}
+
+.expense-form input::placeholder {
+    color: white;
+}
+
+.expense-form input:focus {
+    border-color: black;
+}
+
+.expense-form button {
+    width: 100%;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 7px;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.expense-form button:hover {
+    background: #1d4ed8;
+}
+
+.expense-container h2 {
+    margin-top: 30px;
+    padding-bottom: 12px;
+    font-size: 20px;
+    color: #333;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 10px;
+}
+
+.expense-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.expense-item p {
+    margin: 0;
+}
+
+.expense-item p:first-child {
+    flex: 1;
+    color: #444;
+    font-weight: 500;
+}
+
+.expense-item p:nth-child(2) {
+    color: #222;
+    font-weight: bold;
+}
+
+.expense-item button {
+    padding: 7px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #dc2626;
+    color: white;
+    cursor: pointer;
+}
+
+.expense-item button:hover {
+    background: #b91c1c;
+}
+
+.expense-container > p {
+    color: #666;
+}
+
+.expense-container > p:last-child {
+    margin-top: 24px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #111;
+}
+
+@media (max-width: 600px) {
+    .expense-container {
+        margin: 30px auto;
+        padding: 22px;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+}
