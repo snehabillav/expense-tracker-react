@@ -1,3 +1,5 @@
+node_modules/
+
 src/assets/
 src/context-practice/
 src/custom-hooks/
